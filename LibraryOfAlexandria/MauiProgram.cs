@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using LibraryOfAlexandria.ClassPackage.Persistence;
+using SQLite;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryOfAlexandria
 {
@@ -17,9 +19,14 @@ namespace LibraryOfAlexandria
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<DataBase>();       
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "alexandriaDataBase.db");
+            builder.Services.AddSingleton<DataBase>(s => ActivatorUtilities.CreateInstance<DataBase>(s, dbPath));
+
+
 
             return builder.Build();
         }

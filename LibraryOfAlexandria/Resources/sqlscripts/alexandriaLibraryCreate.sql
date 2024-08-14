@@ -2,7 +2,7 @@
 --This will also create a spool off in the maui file so there is a reference internally to the tables if needed to look up. 
 --
 
-CREATE DATABASE AlexandriaLibrary;
+--CREATE DATABASE AlexandriaLibrary;
 DROP TABLE CLIENTS;
 DROP TABLE BOOKRENTAL;
 DROP TABLE BOOKS;
@@ -15,11 +15,10 @@ lastName NVARCHAR2(20) CONSTRAINT cli_lname_nn NOT NULL,
 city NVARCHAR2(20) CONSTRAINT cli_city_nn NOT NULL
 );
 
-ALTER TABLE ALS_CLIENTS
-    ADD CONSTRAINT cid_ck CHECK(regexp_like(customerID, '[0-9]{6}'));
+--ALTER TABLE ALS_CLIENTS
+ --   ADD CONSTRAINT cid_ck CHECK(regexp_like(customerID, '[0-9]{6}'));
 
-CREATE TABLE ALS_BOOKRENTAL
-(customerID NUMBER(6) CONSTRAINT cid_fk
-    REFERENCES ALS_CLIENTS
+--CREATE TABLE ALS_BOOKRENTAL
+--(customerID NUMBER(6) CONSTRAINT cid_fk
+   -- REFERENCES ALS_CLIENTS
 
-)
