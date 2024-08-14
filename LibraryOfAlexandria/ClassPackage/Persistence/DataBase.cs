@@ -11,10 +11,7 @@ namespace LibraryOfAlexandria.ClassPackage.Persistence
 
     {
     private readonly SqlConnection _database;
-    public string server;
-    public string database;
-    public string uid;
-    public string password;
+     
 
     //constructor for database connection
     public DataBase()
@@ -23,14 +20,9 @@ namespace LibraryOfAlexandria.ClassPackage.Persistence
     }
     public void Initialize()
     {
-        server = "localdb";
-        database = "alexandriadatabase.db";
-        uid = "MSI/chris";
-        password = "";
-        string connectionString;
-        connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + ";";
+        
 
-        connection = new MySqlConnection(connectionString);
+        connection = new SqlConnection(connectionString);
     }
     //This will open a connection to the library database
     public bool OpenConnection()
