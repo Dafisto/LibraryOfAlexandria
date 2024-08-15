@@ -1,6 +1,9 @@
 ﻿@page "/findbooks"
 @using Microsoft.Maui.Controls
-
+@using LibraryOfAlexandria.ClassPackage.Persistence;
+@using LibraryOfAlexandria.ClassPackage.Domain;
+@inject BooksManager booksManager;
+@inject DataBase dataBase;
 
 
 <div class="header">
@@ -21,9 +24,9 @@
 
 <div>
     <select>
-        @foreach(FindBooks books in foundBooks)
+        @foreach (Books book in foundBooks)
         {
-            <option></option>
+            <option value="@book.Isbn">@book</option>
         }
     </select>
 </div>
@@ -52,7 +55,7 @@
 </div>
 
 @code {
-    private List<FindBooks> foundBooks = new List<FindBooks>();
+    private List<Books> foundBooks = new List<Books>();
     private string searchID { get; set; } = string.Empty;
     private string searchName { get; set; } = string.Empty;
     private string searchAuthor { get; set; } = string.Empty;
@@ -63,15 +66,26 @@
     private string foundCategory { get; set; } = string.Empty;
     private string foundAvailable { get; set; } = string.Empty;
     private string? errMess;
+    string? foundBookID;
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         searchID = "Any";
         searchName = "Any";
         searchAuthor = "Any";
         searchCategory = "Any";
+        
+        try
+        {
+            foundBooks = await dataBase.GetItemsAsync();
+        }
+        catch (Exception ex)
+        {
+            errMess = ex.Message;
+        }
     }
+ 
     void errorFix()
     {
         errMess = null;

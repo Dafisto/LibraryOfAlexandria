@@ -1,6 +1,8 @@
 ﻿using LibraryOfAlexandria.ClassPackage.Persistence;
 using SQLite;
 using Microsoft.Extensions.Logging;
+using LibraryOfAlexandria.ClassPackage.Domain;
+
 
 namespace LibraryOfAlexandria
 {
@@ -22,9 +24,11 @@ namespace LibraryOfAlexandria
             builder.Services.AddBlazorWebViewDeveloperTools();
             builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<DataBase>();       
-            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "alexandriaDataBase.db");
+                  
+            var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "alexandriaDataBase.db");
             builder.Services.AddSingleton<DataBase>(s => ActivatorUtilities.CreateInstance<DataBase>(s, dbPath));
+
+            builder.Services.AddSingleton<BooksManager>();
 
 
 

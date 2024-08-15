@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryOfAlexandria.ClassPackage.Persistence;
 
 namespace LibraryOfAlexandria.ClassPackage.Domain
 {
-    public class BooksManager
+  public class BooksManager
     {
         //internal list of Books to iterate through and manage queries
         internal List<Books> books = new List<Books>();
@@ -27,21 +28,21 @@ namespace LibraryOfAlexandria.ClassPackage.Domain
             searchName = searchName.ToLower();
             searchAuthor = searchAuthor.ToLower();
             searchCategory = searchCategory.ToLower();
-            List<Books> books = new List<Books>();
+            List<Books> bk = new List<Books>();
             foreach (Books book in books)
             {
-                if (book.Isbn == searchID || searchID == "any")
+                if(book.Isbn == searchID || searchID == "any")
                 {
-                    if (book.BookName == searchName || searchName == "any")
+                    if(book.BookName == searchName || searchName == "any")
                     {
-                        if (book.Author == searchAuthor || searchAuthor == "any")
+                        if(book.Author == searchAuthor || searchAuthor == "any")
                         {
-                            books.Add(book);
+                            bk.Add(book);
                         }
                     }
                 }
             }
-            return books;
+            return bk;
         }
 
         //returns individual book from search
@@ -65,7 +66,7 @@ namespace LibraryOfAlexandria.ClassPackage.Domain
             bool checkedOut = false;
             foreach (Books book in books)
             {
-                if (book.Isbn == bookID)
+                if(book.Isbn == bookID)
                 {
                     if (book.Available == true)
                     {

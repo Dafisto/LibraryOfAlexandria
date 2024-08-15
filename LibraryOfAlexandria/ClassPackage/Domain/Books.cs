@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace LibraryOfAlexandria.ClassPackage.Domain
 {
     internal class Books
     {
         // getters and setters
+        
         private string isbn;
         private string author;
         private string genre;
@@ -17,7 +19,7 @@ namespace LibraryOfAlexandria.ClassPackage.Domain
         private string borrow_book;
         private string return_book;
 
-
+        [PrimaryKey]
         public string Isbn
         {
             get { return isbn; }
@@ -54,15 +56,14 @@ namespace LibraryOfAlexandria.ClassPackage.Domain
             set { return_book = value; }
         }
         //constructor with inputs
-        public Books(string isbn, string author, string genre, string title, bool available, string borrow_book, string return_book)
+        public Books(string isbn, string title, string author, string genre, bool available)
         {
             this.Isbn = isbn;
             this.Author = author;
             this.Genre = genre;
             this.BookName = title;
             this.Available = available;
-            this.BorrowBook = borrow_book;
-            this.ReturnBook = return_book;
+            
         }
 
         //null constructor no inputs
